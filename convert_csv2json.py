@@ -39,6 +39,7 @@ def csv_to_json(file_path):
     which treats each row as a separate object in an array, and saves it as json
     """
     df = pd.read_csv(file_path)
+    df.fillna("", inplace=True)
     data = df.to_dict(orient='records')
     save_file(data)
 
