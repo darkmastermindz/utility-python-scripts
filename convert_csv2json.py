@@ -37,6 +37,9 @@ def csv_to_json(file_path):
     """
     This function reads the csv file, converts it to a dictionary using to_dict(orient='records')
     which treats each row as a separate object in an array, and saves it as json
+    note: df.fillna will treat empty values as empty string 
+    alternatively, you can use the following to fill with null instead
+    df.fillna(value=None, inplace=True)
     """
     df = pd.read_csv(file_path)
     df.fillna("", inplace=True)
