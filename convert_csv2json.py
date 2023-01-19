@@ -5,6 +5,10 @@ import json
 import os
 
 def open_file():
+    """
+    This function opens a file dialog box for selecting a file.
+    It also checks if the file path is valid or not.
+    """
     root = tk.Tk()
     root.withdraw()
     file_path = filedialog.askopenfilename()
@@ -14,6 +18,11 @@ def open_file():
     return file_path
 
 def save_file(data):
+    """
+    This function opens a save dialog box for selecting the location and name of the file.
+    It also checks if the file path is valid or not.
+    It then saves the json file with the data passed as an argument.
+    """
     json_path = filedialog.asksaveasfilename()
     if json_path[-5:] != '.json':
         json_path += '.json'
@@ -25,6 +34,9 @@ def save_file(data):
     print("File successfully converted and saved!")
 
 def csv_to_json(file_path):
+    """
+    This function reads the csv file, converts it to a dictionary and saves it as json
+    """
     df = pd.read_csv(file_path)
     data = df.to_dict(orient='records')
     save_file(data)
