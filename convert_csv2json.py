@@ -1,15 +1,27 @@
 import pandas as pd
 import tkinter as tk
 from tkinter import filedialog
+import os
 
-root = tk.Tk()
-root.withdraw()
+def open_file():
+    root = tk.Tk()
+    root.withdraw()
+    file_path = filedialog.askopenfilename()
+    if not os.path.isfile(file_path):
+        print("Invalid file path")
+        exit()
+    return file_path
 
-file_path = filedialog.askopenfilename()
+def save_file(df):
+    json_path = filedialog.asksaveasfilename()
+    if json_path[-5:] != '.json':
+        json_path += '.json'
+    if not json_path:
+        print("Invalid file path")
+        exit()
+    df.to_json(json_path)
+    print("File successfully converted and saved!")
 
+file_path = open_file()
 df = pd.read_csv(file_path)
-
-json_path = filedialog.asksaveasfilename(defaultextension=".json")
-df.to_json(json_path)
-
-print("File successfully converted and saved!")
+save_file(df)
